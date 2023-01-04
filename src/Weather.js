@@ -1,39 +1,43 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-export default function Weather(props) {
-  function handleResponse(response) {}
+export default function Weather() {
+  let [city, setCity] = useState(" ");
+  let [weather, setWeather] = useState({});
 
-  let apiKey = "a89397bbee39ef0cd278072307619f0b";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.city}&appid=${apiKey}&units=metric`;
+  function displayWeather(response) {
+    setWeather({
+      temperature: response.data.main.temp,
+      wind: response.data.wind.speed,
+      humidity: response.data.main.humidity,
+      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      description: response.data.weather[0].description,
+    });
+  }
 
-  axios.get(apiUrl).then(handleResponse);
+  function handleSubmit(event) {
+    event.preventDefault();
+    let apiKey = "a89397bbee39ef0cd278072307619f0b";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(displayWeather);
+  }
+  function updateCity(event) {
+    setCity(event.target.value);
+  }
 
   return (
     <div className="container">
       <div className="card1">
-        <form className="searchBar" id="searchForm">
-          <input
-            type="text"
-            placeholder="Enter city"
-            className="city-input"
-            id="search-city"
-            autofocus="on"
-            autocomplete="off"
-          />
-          <input
-            type="submit"
-            value="Search"
-            className="form-control btn btn-primary shadow-sm"
-            id="search-button"
-          />
+        <form onSubmit={handleSubmit}>
+          <input type="search" onChange={updateCity} />
+          <input type="submit" value="search" />
         </form>
       </div>
 
       <div className="card2" Name="temperature">
         <div className="" Name="weatherToday">
           <h2 id="city" className="" Name="city">
-            London
+            {(city = "Banjul")}
           </h2>
 
           <h5>
@@ -55,17 +59,18 @@ export default function Weather(props) {
           </ul>
 
           <h1 className="" Name="currentTemp" id="temp">
-            ☀️ 20
+            <img src={weather.icon} alt={weather.description} />
+            {Math.round(weather.temperature)}°C
           </h1>
 
-          <h3 id="description">#</h3>
+          <h3 id="description"> {weather.description}</h3>
           <div className="" Name="row Others" id="others">
             <div className="" Name="col-5 humidity">
               Humidity
               <br />
               <strong>
                 <span className="" Name="humidity-value" id="humidity">
-                  48
+                  {weather.humidity}
                 </span>{" "}
                 %
               </strong>
@@ -75,7 +80,7 @@ export default function Weather(props) {
               <br />
               <strong>
                 <span className="" Name="wind-value" id="wind">
-                  3
+                  {weather.wind}
                 </span>
                 <span className="" Name="windUnits" id="windUnits">
                   m/s
