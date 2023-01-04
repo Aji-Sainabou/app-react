@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export default function Weather() {
-  let [city, setCity] = useState(" ");
-  let [weather, setWeather] = useState({});
+  let [city, setCity] = useState("city ");
+  let [weather, setWeather] = useState("weather");
 
   function displayWeather(response) {
     setWeather({
@@ -92,7 +92,7 @@ export default function Weather() {
       </div>
       <small className="card3" Name="footer">
         <a
-          href="https://github.com/Aji-Sainabou/vanilla"
+          href="https://github.com/Aji-Sainabou/app-react"
           target="_blank"
           rel="noreferrer"
         >
