@@ -1,38 +1,127 @@
-.App {
+body {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  background: linear-gradient(
+    112.1deg,
+    rgb(32, 38, 57) 11.4%,
+    rgb(63, 76, 119) 70.2%
+  );
+}
+
+.card1,
+.card2,
+.card3 {
+  display: block;
+  margin: 3px auto;
+  padding: 5px;
+  width: 100%;
+  max-width: 600px;
+  background-color: #a2a8d3;
+  border: 1px solid black;
+}
+.card1 {
+  border-radius: 10px 10px 0 0;
+  margin-top: 80px;
+}
+.card3 {
+  border-radius: 0 0 10px 10px;
+}
+#location {
+  top: 0;
+}
+.humidity {
+  background-color: #a2a8d3;
+  margin: auto;
+  margin-right: 10px;
+  display: block;
+  border: 2px solid #a2a8d3;
+  border-radius: 7px;
+
   text-align: center;
 }
+.wind {
+  background-color: #a2a8d3;
+  margin: auto;
+  margin-left: 10px;
+  display: block;
+  border: 2px solid #a2a8d3;
+  border-radius: 7px;
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  text-align: center;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.mainIcon {
+  display: inline;
+  margin: 0 auto;
+  width: 80px;
+  vertical-align: middle;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+  font-size: 50px;
+  display: inline;
+  font-weight: bold;
+  vertical-align: middle;
 }
-
-.App-link {
-  color: #61dafb;
+h3 {
+  text-transform: capitalize;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+h5 {
+  font-weight: 100;
+  font-size: 12px;
+}
+.currentTemp {
+  margin: 0;
+  padding: 0;
+}
+.btn {
+  padding: 5px;
+  font-size: 20px;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  background-color: #a2a8d3;
+  border: 2px solid #a2a8d3;
+}
+.btn:hover {
+  background-color: #38598b;
+  border: 2px solid #38598b;
+  cursor: pointer;
+}
+.btn:active {
+  background-color: #38598b;
+}
+#button {
+  padding: 6px;
+}
+.city-input {
+  padding: 11px 8px 7px;
+  font-size: 15px;
+  border: 2px solid #38598b;
+  border-radius: 10px;
+  background-color: #38598b;
+}
+#search-button {
+  width: 80px;
+  margin: 0 10px;
+  padding: 4px;
+  border: 3px solid #38598b;
+}
+.footer a {
+  color: rgb(40, 17, 133);
+  font-size: 15px;
+}
+.unit {
+  text-decoration: none;
+  color: #142d4c;
+  background-color: #a2a8d3;
+  border: none;
+}
+.unit:hover {
+  color: #38598b;
+  cursor: default;
+}
+.unit.active {
+  color: black;
+}
+.degree {
+  margin: 0;
 }
