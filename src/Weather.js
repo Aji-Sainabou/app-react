@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import FormatedDate from "./FormatedDate";
 
 export default function Weather() {
   let [city, setCity] = useState("city ");
@@ -9,6 +10,7 @@ export default function Weather() {
     setWeather({
       temperature: response.data.main.temp,
       wind: response.data.wind.speed,
+      date: new Date(response.data.dt * 1000),
       humidity: response.data.main.humidity,
       icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       description: response.data.weather[0].description,
@@ -29,19 +31,22 @@ export default function Weather() {
     <div className="container">
       <div className="card1">
         <form onSubmit={handleSubmit}>
-          <input type="search" onChange={updateCity} />
-          <input type="submit" value="search" />
+          <input type="search" onChange={updateCity} className="city-input" />
+          <input type="submit" value="search" className="search-button" />
         </form>
       </div>
 
       <div className="card2" Name="temperature">
         <div className="" Name="weatherToday">
           <h2 id="city" className="" Name="city">
-            {(city = "Banjul")}
+            {city}
           </h2>
 
           <h5>
-            last updated at <span id="date">Tuesday 10:00</span>
+            last updated at{" "}
+            <span id="date">
+              <FormatedDate date={weather.date} />
+            </span>
           </h5>
 
           <ul id="units">
