@@ -45,6 +45,7 @@ export default function Weather() {
           <h5>
             last updated at{" "}
             <span id="date">
+              {" "}
               <FormatedDate date={weather.date} />
             </span>
           </h5>
