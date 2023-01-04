@@ -90,16 +90,6 @@ export default function Weather() {
           </div>
         </div>
       </div>
-      <small className="card3" Name="footer">
-        <a
-          href="https://github.com/Aji-Sainabou/app-react"
-          target="_blank"
-          rel="noreferrer"
-        >
-          Open source coded
-        </a>
-        by Aji sainabou Njie
-      </small>
     </div>
   );
 }
