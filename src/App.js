@@ -7,17 +7,6 @@ export default function App() {
     <div className="App">
       <div className="container">
         <Weather defaultCity="Banjul" />
-
-        <small className="card3" Name="footer">
-          <a
-            href="https://github.com/Aji-Sainabou/app-react"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open source coded
-          </a>
-          by Aji sainabou Njie
-        </small>
       </div>
     </div>
   );
