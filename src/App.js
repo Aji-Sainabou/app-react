@@ -1,13 +1,13 @@
+import React from "react";
 import Weather from "./Weather";
 import "./App.css";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <div className="container">
-        <header className="App-header">
-          <Weather />
-        </header>
+        <Weather defaultCity="Banjul" />
+
         <small className="card3" Name="footer">
           <a
             href="https://github.com/Aji-Sainabou/app-react"
@@ -22,5 +22,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

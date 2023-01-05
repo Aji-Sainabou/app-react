@@ -1,101 +1,70 @@
 import React, { useState } from "react";
+import WeatherInfo from "./WeatherInfo";
+
 import axios from "axios";
-import FormatedDate from "./FormatedDate";
+import "./Weather.css";
 
-export default function Weather() {
-  let [city, setCity] = useState("city ");
-  let [weather, setWeather] = useState("weather");
+export default function Weather(props) {
+  const [weatherData, setWeatherData] = useState({ ready: false });
+  const [city, setCity] = useState(props.defaultCity);
 
-  function displayWeather(response) {
-    setWeather({
+  function handleResponse(response) {
+    setWeatherData({
+      ready: true,
+      coordinates: response.data.coord,
       temperature: response.data.main.temp,
-      wind: response.data.wind.speed,
-      date: new Date(response.data.dt * 1000),
       humidity: response.data.main.humidity,
-      icon: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+      date: new Date(response.data.dt * 1000),
       description: response.data.weather[0].description,
+      icon: response.data.weather[0].icon,
+      wind: response.data.wind.speed,
+      city: response.data.name,
     });
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    let apiKey = "a89397bbee39ef0cd278072307619f0b";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    axios.get(apiUrl).then(displayWeather);
+    search();
   }
-  function updateCity(event) {
+
+  function handleCityChange(event) {
     setCity(event.target.value);
   }
 
-  return (
-    <div className="container">
-      <div className="card1">
+  function search() {
+    const apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    axios.get(apiUrl).then(handleResponse);
+  }
+
+  if (weatherData.ready) {
+    return (
+      <div className="Weather">
         <form onSubmit={handleSubmit}>
-          <input type="search" onChange={updateCity} className="city-input" />
-          <input type="submit" value="search" className="search-button" />
-        </form>
-      </div>
-
-      <div className="card2" Name="temperature">
-        <div className="" Name="weatherToday">
-          <h2 id="city" className="" Name="city">
-            {city}
-          </h2>
-
-          <h5>
-            last updated at{" "}
-            <span id="date">
-              {" "}
-              <FormatedDate date={weather.date} />
-            </span>
-          </h5>
-
-          <ul id="units">
-            <strong>
-              <button href="#" id="celsius-temp" className="unit" Name="active">
-                {" "}
-                ºC{" "}
-              </button>
-              |
-              <button href="#" id="fahr-temp" className="unit" Name="">
-                {" "}
-                ºF{" "}
-              </button>
-            </strong>
-          </ul>
-
-          <h1 className="" Name="currentTemp" id="temp">
-            <img src={weather.icon} alt={weather.description} />
-            {Math.round(weather.temperature)}°C
-          </h1>
-
-          <h3 id="description"> {weather.description}</h3>
-          <div className="" Name="row Others" id="others">
-            <div className="" Name="col-5 humidity">
-              Humidity
-              <br />
-              <strong>
-                <span className="" Name="humidity-value" id="humidity">
-                  {weather.humidity}
-                </span>{" "}
-                %
-              </strong>
+          <div className="row">
+            <div className="col-9">
+              <input
+                type="search"
+                placeholder="Enter a city.."
+                className="form-control"
+                autoFocus="on"
+                onChange={handleCityChange}
+              />
             </div>
-            <div className="" Name="col-5 wind">
-              Wind
-              <br />
-              <strong>
-                <span className="" Name="wind-value" id="wind">
-                  {weather.wind}
-                </span>
-                <span className="" Name="windUnits" id="windUnits">
-                  m/s
-                </span>
-              </strong>
+            <div className="col-3">
+              <input
+                type="submit"
+                value="Search"
+                className="btn btn-primary w-100"
+              />
             </div>
           </div>
-        </div>
+        </form>
+        <WeatherInfo data={weatherData} />
       </div>
-    </div>
-  );
+    );
+  } else {
+    search();
+    return "Loading...";
+  }
 }
