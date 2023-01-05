@@ -66,15 +66,7 @@ export default function Weather(props) {
           city={weatherData.city}
         />
         <footer>
-          This project was coded by{" "}
-          <a
-            href="https://www.shecodes.io/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Aji Sainabou Njie
-          </a>{" "}
-          and is{" "}
+          This project was coded by Aji Sainabou Njie and is{" "}
           <a
             href="https://github.com/Aji-Sainabou/react-Weather-app/commits/master/src/Weather.js"
             target="_blank"
